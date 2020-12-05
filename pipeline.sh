@@ -6,6 +6,14 @@ root=/global/home/users/graveltr/ir_axion_decay_v2/
 
 cd ${root}
 
+rm -rf datasets
+rm -rf logs
+rm -rf spectra
+
+mkdir datasets
+mkdir logs
+mkdir spectra
+
 printf "AOR Download Stage \n"
 g++ -std=c++11 download_aors.cpp -o download_aors
 ./download_aors
