@@ -6,7 +6,7 @@
 # The Pipeline
 **Important** - create directories /datasets and /spectra, leave them empty. Also you must configure $root in pipeline.sh to be the directory in which /datasets and /spectra live in (the directory containing this repo). Use full path.
 
-Use pipeline.sh to run the entire pipeline. Make sure to add AORs to aors.txt.
+Use pipeline.sh to run the entire pipeline, do a "module load python/2.7". Make sure to add AORs to aors.txt.
 Use pipeline.slurm with sbatch to run via slurm.
 
 ## AOR Download Stage
