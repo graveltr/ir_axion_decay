@@ -5,9 +5,9 @@
 
 # The Pipeline
 ## AOR Download Stage
-inputs: aors.txt
-source: download_aors.cpp
-outputs: /datasets
+* inputs: aors.txt
+* source: download_aors.cpp
+* outputs: /datasets
 
 Downloads aors from the [Spitzer Heritage Archive
 (SHA)](SPIC://sha.ipac.caltech.edu/applications/Spitzer/SHA/). Use
@@ -15,12 +15,11 @@ Downloads aors from the [Spitzer Heritage Archive
 for finding aors to put in aors.txt. 
 
 ## SPICE Gridded Reduction Stage
-inputs: /datasets
-source: master_reduce_gridded.sh, reduce_gridded.sh
-outputs: /spectra
+* inputs: /datasets
+* source: master_reduce_gridded.sh, reduce_gridded.sh
+* outputs: /spectra
 
 ##  Spectra Python Post Processing Stage
-inputs: /spectra
-source: emptyspace.py, post_process_gridded.py
-outputs: /spectra (augmented)
-
+* inputs: /spectra
+* source: emptyspace.py, post_process_gridded.py
+* outputs: /spectra (augmented)
