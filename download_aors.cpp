@@ -26,9 +26,12 @@ int main() {
 	ifstream myfile ("aors.txt");
 	if (myfile.is_open()) {
 		while ( getline (myfile,aor) ) {
-			cout << "downloading AOR: " << aor << '\n';
-			if(aor[0] != '#') // ignore comments
+			if(aor[0] != '#') {  // ignore comments
+				cout << "downloading AOR: " << aor << '\n';
 				process_aor(aor);
+			} else {
+				cout << aor << '\n';
+			}
 		}
 		myfile.close();
 	} else cout << "Unable to open file"; 
