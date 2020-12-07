@@ -3,7 +3,6 @@
 # Requires "module load python/2.7" (might need to purge current python loaded via "module purge")
 
 root=/global/home/users/graveltr/ir_axion_decay_v2/
-
 cd ${root}
 
 rm -rf datasets
