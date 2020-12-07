@@ -6,7 +6,11 @@
 
 import numpy as np
 import inspect
-import matplotlib.pyplot as plt
+
+import matplotlib
+matplotlib.use('agg')
+
+import pylab as plt
 import pandas as pd
 
 from astropy import constants as const
