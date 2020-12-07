@@ -5,7 +5,7 @@
 #SBATCH --nodes=1
 #SBATCH --account=pc_heptheory
 #SBATCH --partition=lr3
-#SBATCH --time=0:10:00
+#SBATCH --time=10:00:00
 
 # load modules
 module purge
