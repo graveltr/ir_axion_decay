@@ -42,7 +42,7 @@ observation = str(sys.argv[1])
 dir_path = observation[0:observation.rfind("/") + 1]
 observation_code = observation[observation.rfind("/") + 1:len(observation)]
 output_dir = dir_path + observation_code + "_emptyspace/"
-os.system("mkdir " + output_dir)
+os.system("mkdir -p " + output_dir)
 
 print("processing observation: " + observation)
 NUMSEGMENTS = 28
@@ -101,8 +101,14 @@ fig = plt.figure(figsize=(40,80))
 fig.tight_layout()
 integrals = []
 for i in range(0, len(centers)):
-    order_2_int = integrate.cumtrapz(flux_densities[i][0:order_change_idxs[i]], wavelengths[i][0:order_change_idxs[i]], initial=0)
-    order_3_int = integrate.cumtrapz(flux_densities[i][order_change_idxs[i]:], wavelengths[i][order_change_idxs[i]:], initial=0)
+    if (flux_densities[i][0:order_change_idxs[i]].size == 0):
+        order_2_int = [0]
+    else: 
+        order_2_int = integrate.cumtrapz(flux_densities[i][0:order_change_idxs[i]], wavelengths[i][0:order_change_idxs[i]], initial=0)
+    if (flux_densities[i][order_change_idxs[i]:].size == 0):
+        order_3_int = [0]
+    else: 
+        order_3_int = integrate.cumtrapz(flux_densities[i][order_change_idxs[i]:], wavelengths[i][order_change_idxs[i]:], initial=0)
     curr_int = order_2_int[-1] + order_3_int[-1]
     integrals.append(curr_int)
     curr_ax = fig.add_subplot(SUBPLOT_ROWS, SUBPLOT_COLS, i + 1)
@@ -112,11 +118,9 @@ for i in range(0, len(centers)):
     curr_ax.set_title("center = " + str(centers[i]) + "%, integral = " + str(curr_int))
     curr_ax.set_xlabel("wavelength [um]")
     curr_ax.set_ylabel("flux density [Jy]")
-#plt.show() 
 
 print("saving per pixel spectra with integral values plots as image")
 fig.savefig(output_dir + './gridded.png')
-
 
 # In[6]:
 
@@ -199,7 +203,8 @@ CUTOFF = np.percentile(integrals, 68)
 cutoff_idxs = []
 for i in range(0, len(integrals)):
     if integrals[i] < CUTOFF:
-        cutoff_idxs.append(i)
+        if (centers[i] > 5 and centers[i] < 95): 
+            cutoff_idxs.append(i)
 
 for i in range(0, len(wavelengths[0])):
     pixel_values = np.empty(len(cutoff_idxs))
